@@ -1,9 +1,16 @@
 import React from 'react'
-
+import Body from './components/Body'
+import appstore from './utils/appstore'
+import { Provider } from 'react-redux'
 function App() {
   return (
-    <div className='bg-pink-50'>yes</div>
+    <>
+    <Provider store={appstore}>
+     <Body/>
+    </Provider>
+    </>
   )
 }
+
 
 export default App
