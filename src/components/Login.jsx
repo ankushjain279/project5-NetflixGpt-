@@ -1,11 +1,16 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import FormValidate from "../utils/validate";
-import { createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { BODY, LOGO } from "../utils/constant";
 function Login() {
   const [isSignIn, setisSignIn] = useState(true);
   const [errormssg, seterrormssg] = useState(null);
+  const dispatch =useDispatch()
 
   const handlesignin = () => {
     setisSignIn(!isSignIn);
@@ -23,27 +28,34 @@ function Login() {
       //signup
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          console.log(user);
-          // ...
+          
+          // const user = userCredential.user;
+
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+          }).then(() => {
+            const { uid, email,displayName} = auth.currentUser
+            dispatch(addUser({ uid: uid, email: email , displayName: displayName}))
+         
+          }).catch((error) => {
+            seterrormssg(error.message)
+          })
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           seterrormssg(errorCode + " " + errorMessage)
-          // ..
+         
         });
     }
     else {
+
       //signin logic
 
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          // ...
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -55,13 +67,14 @@ function Login() {
 
   const email = useRef();
   const password = useRef();
+  const name = useRef();
 
   return (
     <div>
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/7968847f-3da9-44b3-8bbb-13a46579881f/web/IN-en-20250609-TRIFECTA-perspective_32b70b51-20d4-46db-8a1a-3d5428be5f0e_large.jpg"
+          src={BODY}
           alt=""
         />
       </div>
@@ -75,6 +88,7 @@ function Login() {
           </h1>
           {!isSignIn && (
             <input
+              ref={name}
               required
               className="p-4 w-full text-white rounded-lg my-2 border-1 border-white outline-none bg-gray-700/70"
               type="text"

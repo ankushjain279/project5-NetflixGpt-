@@ -35,3 +35,8 @@ npm i -g  firebase-tools    - firebase Cli
 firebase login
 firebase init
 firebase deploy
+
+
+Note 4-
+jsx always follow camel case 
+means  frameborder this give warning but this does not  frameBorder
