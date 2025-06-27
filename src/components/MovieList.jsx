@@ -3,7 +3,7 @@ import MovieCard from './MovieCard';
 
 function MovieList({movies,title}) {
 
-  console.log('movielist',movies);  
+  // console.log('movielist',movies);  
   return (
     <div>
         <h2 className='font-bold text-white  ml-6 text-3xl hover:underline w-2/10'>{title}</h2>

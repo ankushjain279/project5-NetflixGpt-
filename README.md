@@ -1,4 +1,6 @@
 You, 1 second ago | 1 author (You)
+live link- https://netfix-gpt-7032e.web.app/
+
 # Features
 - Login/Sign Up
      Sign In /Sign up Form
@@ -31,7 +33,7 @@ Simple validation ya DOM manipulation ke liye useful hota hai
 
 Note 3-
 hositing with the help of firebase
-npm i -g  firebase-tools    - firebase Cli
+npm i -g  firebase-tools - firebase Cli
 firebase login
 firebase init
 firebase deploy

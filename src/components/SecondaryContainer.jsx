@@ -3,6 +3,7 @@ import MovieList from './MovieList'
 import { useSelector } from 'react-redux'
 function SecondaryContainer() {
   const movies=useSelector(store=>store.movies)
+  // console.log('rated movie',movies.getRatedMovie);
   return (
     <div className='bg-black'>
         {/* movielist-popular
@@ -12,10 +13,10 @@ function SecondaryContainer() {
         */}
       <div >
       <MovieList movies={movies.getNowPlayingMovie} title={'Now Playing'}/>
+      <MovieList movies={movies.getUpcomingMovie} title={'UpComing'}/>
       <MovieList movies={movies.getTopRated} title={'Top Rated'}/>
       <MovieList movies={movies.getPopularMovie} title={'Popular'}/>
-      <MovieList movies={movies.getNowPlayingMovie} title={'UpComing'}/>
-      <MovieList movies={movies.getNowPlayingMovie} title={'Most Watched'}/>
+      <MovieList movies={movies.getNowPlayingMovie} title={'Rated Movie'}/>
       </div>  
     </div>
   )
