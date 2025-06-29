@@ -6,7 +6,7 @@ export const API_OPTION={
     method: 'GET',
     headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Y2ZiY2Q3Nzg2ZTJmMTI3NjU5MGE3MDViY2RjYTYzNyIsIm5iZiI6MTc1MDQ0MTA2NS42NTUsInN1YiI6IjY4NTU5YzY5MTNiMDlmNDEwNDA0MTVkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xjZ7r2dJ4c46vWT1k_ObJPmkjQ0cgwCFcjJuNFPL8MQ'
+    Authorization:  import.meta.env.VITE_APP_Authorization
     }
   }
 
@@ -16,3 +16,5 @@ export const SUPPORTED_LANGUAGE =
 [{identifier: 'en', name:'English'},
 {identifier: 'hindi', name:'Hindi'},
 {identifier: 'spanish', name:'Spanish'}]
+
+export const OPEN_AI= import.meta.env.VITE_OPEN_AI;

@@ -76,7 +76,8 @@ function Header() {
           {/* search gpt button */}
           <div>
             <button onClick={handleSearchGpt}
-              className='bg-purple-300 text-white rounded-lg px-4 py-2 mt-2 cursor-pointer'>SearchGpt</button>
+              className='bg-purple-300 text-white rounded-lg px-4 py-2 mt-2 cursor-pointer'>
+              {setgpt?'Homepage':'SearchGpt'}</button>
           </div>
 
           <div>

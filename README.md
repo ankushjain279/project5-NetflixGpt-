@@ -42,3 +42,7 @@ firebase deploy
 Note 4-
 jsx always follow camel case 
 means  frameborder this give warning but this does not  frameBorder
+
+Note 5-
+encodeURIComponent() is a built-in JavaScript function that:
+👉 Converts special characters in a string into a format safe for URLs.

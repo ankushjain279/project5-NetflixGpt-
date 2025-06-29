@@ -5,7 +5,7 @@ import { BODY } from '../utils/constant'
 function SearchGpt() {
   return (
     <>
-    <div className='-z-10 absolute'>
+    <div className='-z-10 fixed'>
     <img src={BODY} alt="" />
     </div>
     <GptMovieSuggestion/>
