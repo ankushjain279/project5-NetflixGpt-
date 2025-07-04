@@ -1,18 +1,25 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import lang from '../utils/languageConstant'
 import { useDispatch, useSelector } from 'react-redux'
 import useGptSearch from '../hook/useGptSearch';
 import { addgptMovies } from '../utils/searchgptslice';
+import { setmovie } from '../utils/appConfigSlice';
 
 function GptMovieSuggestion() {
+  const [isSearching, setIsSearching] = useState(false)
   const dispatch=useDispatch();
   const getLang = useSelector(store => store.app.lang)
   const SearchText = useRef();
 
   const handleGptSearch = () => {
+    const text = SearchText.current.value.trim();
+    if(!text || isSearching)return;
+    setIsSearching(true);
+    dispatch(setmovie(true))
     dispatch(addgptMovies({movieNames:null,movieResults:null}))
     const query=`You are a movie recommender assistant. Suggest movies based on the text you provided ${SearchText.current.value}. Give only the best 5 movies, with names comma separated like this: dhoom,ready,jalebi,don,chichore`
     useGptSearch(query,dispatch);
+    
   };
 
   return (

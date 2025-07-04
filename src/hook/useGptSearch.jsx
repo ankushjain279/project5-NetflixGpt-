@@ -39,9 +39,11 @@ async function useGptSearch(query,dispatch) {
       const results = await Promise.all(PromiseArray); 
       console.log(results);
       dispatch(addgptMovies({movieNames:data,movieResults:results}))
+      dispatch(setmovie(false))
 
     } catch (err) {
       console.error("GPT Fetch Error:", err);
+      dispatch(setmovie(false))
       return null;
     }
   }
