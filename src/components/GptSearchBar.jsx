@@ -6,7 +6,7 @@ import Shimmer from './Shimmer'
 function GptSearchBar() {
   const { gptMovies, gptMoviesName } = useSelector((store) => store.gpt);
   const showMovie=useSelector((store)=>store.app.showMovie)
-  const show=useSelector(store=>store.app.setshowShimmer)
+  
 
   if(!gptMovies ) return showMovie && <Shimmer/>;
   return (

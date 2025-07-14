@@ -11,15 +11,23 @@ function GptMovieSuggestion() {
   const getLang = useSelector(store => store.app.lang)
   const SearchText = useRef();
 
-  const handleGptSearch = () => {
+  const handleGptSearch = async () => {
+    
     const text = SearchText.current.value.trim();
     if(!text || isSearching)return;
     setIsSearching(true);
     dispatch(setmovie(true))
     dispatch(addgptMovies({movieNames:null,movieResults:null}))
     const query=`You are a movie recommender assistant. Suggest movies based on the text you provided ${SearchText.current.value}. Give only the best 5 movies, with names comma separated like this: dhoom,ready,jalebi,don,chichore`
-    useGptSearch(query,dispatch);
-    
+    try {
+      await useGptSearch(query, dispatch);
+      console.log('✅ hello ji jai mata');
+    } catch (err) {
+      console.error('❌ GPT Search failed:', err);
+    } finally {
+      console.log('in finally');
+      setIsSearching(false);
+    }
   };
 
   return (

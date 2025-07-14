@@ -40,6 +40,7 @@ async function useGptSearch(query,dispatch) {
       console.log(results);
       dispatch(addgptMovies({movieNames:data,movieResults:results}))
       dispatch(setmovie(false))
+      return;
 
     } catch (err) {
       console.error("GPT Fetch Error:", err);

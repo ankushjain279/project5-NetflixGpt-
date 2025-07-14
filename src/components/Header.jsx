@@ -9,12 +9,15 @@ import { signOut } from "firebase/auth";
 import { addtoggleBtnSearch } from '../utils/searchgptslice'
 import { SUPPORTED_LANGUAGE } from '../utils/constant';
 import { setLang } from '../utils/appConfigSlice';
+import { addMovieDescription } from '../utils/movieslice';
 function Header() {
   const lang = useRef()
   const [showSignOut, setShowSignOut] = useState(false);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  
   const setgpt = useSelector(store => store.gpt.toggleSearch)
+  const showMovieDescription= useSelector(store => store.movies.getMovieDescription)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -41,12 +44,19 @@ function Header() {
   }
 
   const handleSearchGpt = () => {
-    dispatch(addtoggleBtnSearch())
-  }
-
+    if (setgpt || showMovieDescription) {
+      // If we're not on home, go back to home
+      if (setgpt) dispatch(addtoggleBtnSearch());
+      if (showMovieDescription) dispatch(addMovieDescription());
+    } else {
+      // If on home, open GPT
+      dispatch(addtoggleBtnSearch());
+      
+    }
+  };
+  
   const handleLanguageChange = () => {
     dispatch(setLang(lang.current.value))
-    // console.log(lang.current.value);
   }
   return (
     <div className='w-full flex justify-between fixed top-0 px-8 py-bg-gradient-to-b from-black/80 z-100'>
@@ -77,7 +87,7 @@ function Header() {
           <div>
             <button onClick={handleSearchGpt}
               className='bg-purple-300 text-white rounded-lg px-4 py-2 mt-2 cursor-pointer'>
-              {setgpt?'Homepage':'SearchGpt'}</button>
+              {setgpt || showMovieDescription ?'Homepage':'SearchGpt'}</button>
           </div>
 
           <div>
@@ -100,12 +110,7 @@ function Header() {
                   >
                     Sign Out
                   </li>
-                  <li
-                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer rounded"
-                    y
-                  >
-                    Profile
-                  </li>
+                  
                 </ul>
               </div>
             )}

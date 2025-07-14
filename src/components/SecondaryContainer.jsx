@@ -3,7 +3,6 @@ import MovieList from './MovieList'
 import { useSelector } from 'react-redux'
 function SecondaryContainer() {
   const movies=useSelector(store=>store.movies)
-  // console.log('rated movie',movies.getRatedMovie);
   return (
     <div className='bg-black'>
         {/* movielist-popular

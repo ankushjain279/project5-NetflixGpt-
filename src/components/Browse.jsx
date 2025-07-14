@@ -8,12 +8,14 @@ import useTopRated from '../hook/useTopRated'
 import useUpcomingMovie from '../hook/useUpcomingMovie';
 import SearchGpt from './SearchGpt';
 import { useSelector } from 'react-redux';
+import OnclickMovieDescription from './OnclickMovieDescription'
 function Browse() {
   useNowPlayingMovie()
   usePopularMovie()
   useTopRated()
   useUpcomingMovie()
   const showGpt=useSelector(store=>store.gpt.toggleSearch)
+  const showMovieDescription=useSelector(store=>store.movies.getMovieDescription)
   // console.log(showGpt);
   return (
     <>
@@ -28,8 +30,12 @@ function Browse() {
         -movie list*n  
       */}
         {
-        showGpt ?  <SearchGpt/>:
-        <><MainContainer/>
+        showMovieDescription?
+        <OnclickMovieDescription/>
+        :  
+        showGpt ? <SearchGpt/>:
+        <>
+        <MainContainer/>
         <SecondaryContainer/>
         </>
         }
